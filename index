@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Reina 💖</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Georgia', serif;
+        overflow: hidden;
+    }
+
+    .contenedor {
+        text-align: center;
+        animation: aparecer 2s ease-in-out;
+    }
+
+    .carta {
+        width: 360px;
+        background: #fffaf3;
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        padding: 20px;
+        transform-origin: top;
+        animation: abrirCarta 2s ease forwards;
+    }
+
+    .imagen {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .imagen img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .texto {
+        font-size: 16px;
+        color: #5a2a2a;
+        min-height: 200px;
+        white-space: pre-wrap;
+    }
+
+    .firma {
+        margin-top: 15px;
+        font-weight: bold;
+        color: #b23a48;
+    }
+
+    @keyframes abrirCarta {
+        0% { transform: scaleY(0); }
+        100% { transform: scaleY(1); }
+    }
+
+    @keyframes aparecer {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .corazones {
+        position: fixed;
+        top: -10px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .corazon {
+        position: absolute;
+        color: rgba(255,255,255,0.8);
+        font-size: 20px;
+        animation: caer linear infinite;
+    }
+
+    @keyframes caer {
+        0% { transform: translateY(-10px); opacity: 1; }
+        100% { transform: translateY(110vh); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Música de fondo -->
+<audio autoplay loop>
+    <source src="Die_With_A_Smile.mp3" type="audio/mpeg">
+</audio>
+
+<div class="contenedor">
+    <div class="carta">
+        <div class="imagen">
+            <img src="reina.JPEG" alt="Reina">
+        </div>
+        <div id="texto" class="texto"></div>
+        <div class="firma">Con amor, Deivy 💖</div>
+    </div>
+</div>
+
+<div class="corazones" id="corazones"></div>
+
+<script>
+const mensaje = `hola amor feliz primer mes juntos , se q no soy el mejor hombre pero trato de serlo para ti , te amo y te adoro , alegras mis dias y los llenas de alegria , te amo con el alma y mas alla de ella , sonare como un niño al decir esto pero me gustaria tener una vida contigo , casarnos y llegar a viejitos , me gusta tu forma de ser , amo tu forma de pensar TE AMO`;
+
+let i = 0;
+function maquinaEscribir() {
+    if (i < mensaje.length) {
+        document.getElementById("texto").innerHTML += mensaje.charAt(i);
+        i++;
+        setTimeout(maquinaEscribir, 50);
+    }
+}
+setTimeout(maquinaEscribir, 2000);
+
+// corazones cayendo
+function crearCorazon() {
+    const corazon = document.createElement("div");
+    corazon.classList.add("corazon");
+    corazon.innerHTML = "❤";
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.animationDuration = (3 + Math.random() * 5) + "s";
+    document.getElementById("corazones").appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 8000);
+}
+
+setInterval(crearCorazon, 300);
+</script>
+
+</body>
+</html>
